@@ -1,0 +1,34 @@
+
+Test SCF.4
+----------
+Tests the calculation of ten lowest J=1 SCF states, using Normal Modes 
+supplied by the user.
+
+Key input parameters
+--------------------
+JMAX   = 1 indicates total angular momentum of J=1
+ISCFCI = 0 forces `multimode' along the required SCF route.
+MCHECK > 0 transforms equilibrium geometry to principle axis system
+INORM  = 0 indicates Normal Modes to be supplied by the user.
+NPOT   = NMODE (suggested `book-keeping' value...see below...parameter ignored)
+NSTAT  < 0 produces SCF calculations for |NSTAT| states.
+
+Remarks
+-------
+The lowest 10 (NSTAT = -10) SCF hartree product functions are determined from
+a knowledge of the values of `omega' supplied by the user (INORM = 0).
+These 10 J=0 and J=JMAX SCF states are then determined to a tolerance of 
+CONV = 1.D-2 cm-1, for a maximum of ICOUPL = 3-mode coupling of the potential
+in internal coordinates (IWHICH > 0). The J > 0 energies are calculated by the
+`Adiabatic Rotation' approximation, as explained in the Manual.
+
+For potentials in internal coordinates (IWHICH > 0), the parameter NPOT
+is allocated by `multimode' to the number of Normal Modes of the system (see
+Manual for the use of NATOM and NOTTR to define the number of modes (NMODE)), 
+and is ignored on input.
+
+When the Normal Modes are supplied by the user (INORM = 0), the NPOT values of 
+`omega' input as IPOT,JPOT,CPOT are included in the input parameters.  Also, 
+when the Normal Modes are supplied by the user (INORM = 0), the NORMAL 
+COORDINATE DISPLACEMENTS are included in the input parameters.
+

@@ -1,0 +1,32 @@
+
+Test SCF.1
+----------
+Tests the calculation of the ten lowest-energy J=0 SCF states, using Normal
+Modes determined by `multimode'.
+
+Key input parameters
+--------------------
+ISCFCI = 0 forces `multimode' along the required SCF route.
+MCHECK > 0 transforms equilibrium geometry to principle axis system
+INORM  > 0 indicates Normal Modes to be constructed by `multimode'.
+NPOT   = 0 (suggested `book-keeping' value...see below...parameter ignored)
+NSTAT  < 0 produces SCF calculations for |NSTAT| states.
+
+Remarks
+-------
+The lowest 10 (NSTAT = -10) SCF hartree product functions are determined from
+a knowledge of the values of `omega' resulting from the Normal Mode analysis
+(INORM > 0).  These 10 SCF states are then determined to a tolerance of
+CONV = 1.D-2 cm-1, for a maximum of ICOUPL = 3-mode coupling of the potential
+in internal coordinates (IWHICH > 0).
+
+For potentials in internal coordinates (IWHICH > 0), the parameter NPOT
+is allocated by `multimode' to the number of Normal Modes of the system (see
+Manual for the use of NATOM and NOTTR to define the number of modes), and is
+ignored on input, although an input value of NPOT = 0 is suggested...see below.
+
+When using the Normal Mode facility (INORM > 0), the NPOT values of `omega'
+input as IPOT,JPOT,CPOT are omitted from the input parameters.  Also, when
+using the Normal Mode facility (INORM > 0), the NORMAL COORDINATE
+DISPLACEMENTS are omitted from the input parameters.
+
