@@ -55,7 +55,7 @@ Lots of notes added.
 # Ackowledgement
 
 ## Funding Agency
-The public version of MULTIMODE has been funded by NSF.
+The original version was created by Stuart Carter, but the public user-friendly version was funded by NSF.
 
 ## Credit
 
