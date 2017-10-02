@@ -1,0 +1,27 @@
+****************************************************************************
+IMPORTANT ------DECLARATION
+****************************************************************************
+
+MULTIMODE Version 4.9.0 is subject to Copyright, and is for use only by the
+group (or groups) to which it is supplied.  It must not be distributed to
+groups outside the Institution from which the order was placed.  Any changes
+made by the user should be communicated to us at the e-mail address given
+below.  Failure to do this may render the user forfeit to any subsequent
+maintenance/support. I would be obliged if any new users of MULTIMODE  would
+confirm by e-mail that they are willing to abide by this condition of sale.
+
+Any publication that results from the use of MULTIMODE must contain a
+suitable reference:
+
+  'MULTIMODE' is a variational code for the calculation of rovibrational
+  energies of large polyatomic molecules; written by S. Carter,
+  with contributions from B.J. Braams, J.M. Bowman and N.C. Handy; Refs
+  (a) S. Carter, S. J. Culik and J. M. Bowman, J. Chem. Phys. 107, 10458
+  (1997); (b) S. Carter and J. M. Bowman, J. Chem. Phys. 108, 4397 (1998);
+  (c) S. Carter, J. M. Bowman, and N. Handy, Theoretical Chem. Accnts. 100,
+  191 (1998); (d) S. Carter and N.C. Handy, J. Chem. Phys. 113, 987 (2000);
+  (e) R. Burcl, S. Carter and N.C. Handy, Chem. Phys. Lett. 380, 237 (2003)
+
+****************************************************************************
+END OF DECLARATION
+****************************************************************************
