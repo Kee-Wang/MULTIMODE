@@ -54,4 +54,18 @@ Lots of notes added.
 
 # Ackowledgement
 
+## Funding Agency
 The public version of MULTIMODE has been funded by NSF.
+
+## Credit
+
+### Theory
+* Joel M. Bowman
+* Stuart Carter
+* TBD
+
+### MM orginial package and documentation
+* Stuart Carter
+
+### User-friendly Realization
+* TBD
