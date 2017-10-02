@@ -11,6 +11,7 @@ MULTIMODE is a general code that obtains the ro-vibrational eigenvalues and eige
 ### Essential
 
 - [ ] A more detailed TO-DO-LIST
+- [ ] A more detailed README.md
 
 
 ### Optional
