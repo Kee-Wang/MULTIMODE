@@ -33,6 +33,7 @@ MULTIMODE is a general code that obtains the ro-vibrational eigenvalues and eige
 MM has been continuously developed since 1996. Initially MM was code for group research use only. Now the code has been made publicly available since version 5.1.4, thanks to the funding from NSF.
 
 ## Public version updates [Current project]
+These are user-friendly versions, with current version first.
 
 ### ver. 5.1.4 Oct. 8, 2017
 The first publicly-avaible version. The package was uploaded to Github with a myrid of supplementary materials to make the MM as user-friendly as possible.
