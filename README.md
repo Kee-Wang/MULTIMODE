@@ -8,6 +8,20 @@ MULTIMODE is a general code that obtains the ro-vibrational eigenvalues and eige
 * Our MM was tested with `gfotran` or `ifort` compilor in Linux system. 
 * There is known compatibility problem compling using MacOS with `GNU Fortran (GCC) 6.1.0`, and we don't have a soluiton for that yet.
 
+## A Quick Usage Guide
+Details of usage is elaborated in `/mm/src`, and here we only provide a glance of general procedure.
+
+* Go to `/mm/src` to link user's potential in `user.XXX.f`
+* Compile with provided `Makefile` to get executable `mm.x`
+* User has to modify input file `fort.1` according to user's need
+* Execute `./mm.x fort.1 fort.2` with `fort.2` the output file name
+* Wait for program to end and get the result
+
+**Common problems are discusseed in `QnA.md` file.**
+
+
+
+
 
 
 ## TO-DO-LIST
