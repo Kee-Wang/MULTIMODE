@@ -17,7 +17,7 @@ Details of usage is elaborated in `/mm/src`, and here we only provide a glance o
 * Execute `./mm.x fort.1 fort.2` with `fort.2` the output file name
 * Wait for program to end and get the result
 
-**Common problems are discusseed in `QnA.md` file.**
+**Common problems are discusseed in [`QnA.md`](https://github.com/Kee-Wang/MULTIMODE/blob/master/QnA.md) file.**
 
 
 
