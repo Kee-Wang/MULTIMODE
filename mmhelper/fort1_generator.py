@@ -93,7 +93,7 @@ def generate_fort1(filename, p):
     for i in range(len(NBF)):
         f.write(('{:5d}'*4+'\n').format(NBF[i],MBF[i],NVF[i],MVF[i]))
     f.write('C**NUCLEAR SYMBOLS\n')
-    f.write((' '*4+'{:4s}'*3).format(*p[21]))
+    f.write((' '*4+'{:4s}'*3+'\n').format(*p[21]))
     f.write('C**SCF STATE DEFINITIONS (SEE ORIGINAL DEFINITION BY JELSKI) \n')
     f.write('C**NPOT (ONLY IF IWHICH=0) \n')
     if IWHICH is 0:
@@ -128,9 +128,8 @@ def generate_fort1(filename, p):
     return
 
 
-inputs = list()
-TITLE = 'water example'
 
+TITLE = 'water example'
 NATOM = 3
 NSTAT = -1
 CONV = '1.D-2'
@@ -210,7 +209,7 @@ OVF = 'water.vib'
 
 
 
-
+inputs = list()
 inputs.append(TITLE)
 inputs.append([NATOM,NSTAT,CONV,ICOUPL,ICOUPC,ISCFCI,IWHICH,IDISC,NROTTR,JMAX,MCHECK,INORM])
 inputs.append([ICI, NMAX,CUT, EVLJ0, NVALR, KSTEP, IPRINT, MATSIZ, IREACT, MOLPRO, MOLINC])
