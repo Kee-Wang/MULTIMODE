@@ -153,7 +153,7 @@ class MMHelper():
         self.MAXSUM_entry = longframe('MAXSUM',12)
         self.MAXBAS_entry = longframe('MAXBAS for each mode',12)
         self.NBF_entry = longframe('NBF',12)
-        self.NROTTR_entry = longframe('NROTTR', '12',['Quick Info',"Number of rotational and translational degrees of freedom to beincluded in 'vibrational' modes \nnumber of modes = NMODE=3*NATOM-6+NROTTR"])
+        self.NROTTR_entry = longframe('NROTTR', 0,['Quick Info',"Number of rotational and translational degrees of freedom to beincluded in 'vibrational' modes \nnumber of modes = NMODE=3*NATOM-6+NROTTR"])
 
 
 
@@ -218,7 +218,7 @@ class MMHelper():
         self.LINEAR = int(self.LINEAR_check_button.get())
 
         #self.NBF_temp = int(self.NBF_entry.get())
-        Nnode = 3 * self.NATOM - 6 + self.LINEAR
+        Nnode = 3 * self.NATOM - 6 + self.LINEAR + self.NROTTR_entry.get()
         print('button',self.LINEAR_check_button.get())
         NBF = list()
         MBF = list()
