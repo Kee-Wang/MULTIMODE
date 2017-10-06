@@ -1,13 +1,24 @@
-
+import sys
 try:
     # for Python2
     from Tkinter import *
+    import Tkinter as tkinter
+
+    #tkinter = Tkinter
 except ImportError:
     # for Python3
     from tkinter import *
 
+
 class MMHelper():
+    import sys
+    if sys.version_info[0] is 2:
+        import Tkinter as tk
+    else:
+        import tkinter as tk
     def __init__(self, root):
+
+        """List of default values"""
         self.TITLE = 'water example'
         self.NATOM = 3
         self.NSTAT = -1
@@ -89,25 +100,34 @@ class MMHelper():
         self.remember = 0
         self.build_window()
 
+    def infobox(self, event=None,info=''):
+        import sys
+        if sys.version_info[0] is 2:
+            import Tkinter
+            import tkMessageBox
+
+            tkMessageBox.showinfo(*info)
+        else:
+            from tkinter import messagebox
+            messagebox.showinfo(*info)
+
+
+    def longframe(self, text,default_value = '',info=['Quick Info','Sorry, no info, please see manual.']):
+
+
+        fm = Frame(root)
+        fm.pack()
+        label = Label(fm, text=text)
+        label.pack(side=LEFT)
+        entry = Entry(fm,width=10)
+        entry.pack(side=LEFT)
+        entry.insert(0, default_value)
+
+        label.bind('<Button-1>', lambda event: self.infobox(event,info))
+        return entry
+
 
     def build_window(self):
-        def longframe(text,default_value = '',info=['Quick Info','Sorry, no info, please see manual.']):
-            def infobox(event, info):
-                import tkinter
-                from tkinter import messagebox
-                tkinter.messagebox.showinfo(*info)
-
-            fm = Frame(root)
-            fm.pack()
-            label = Label(fm, text=text)
-            label.pack(side=LEFT)
-            entry = Entry(fm)
-            entry.pack(side=LEFT)
-            entry.insert(0, default_value)
-
-            label.bind('<Button-1>', lambda event: infobox(event,info))
-            return entry
-
 
 
         bottomFrame = Frame(root)
@@ -121,10 +141,10 @@ class MMHelper():
         Label(root, text="1. Molecule System Information", bg="red", fg="white",font=("Helvetica", 16)).pack()
 
 
-        self.TITLE_entry = longframe('Name of project: ',"My MULTMODE Project",['Info','The name used inside `fort.1` file, not the filename.'])
-        self.NATOM_entry = longframe('Number of atoms: ',3)
-        self.SYMB_entry = longframe('Nuclear Symbols: ','H H',['Example', 'Tips: \n1. Separate with spaces.\n2. Order of symbols has to be consistent with your potential.\nFor example, water could be: \nO H H'])
-        self.NMASS_entry = longframe('Nuclear Mass (in a.u.): ','11')
+        self.TITLE_entry = self.longframe('Name of project: ',"My MULTMODE Project",['Info','The name used inside `fort.1` file, not the filename.'])
+        self.NATOM_entry = self.longframe('Number of atoms: ',3)
+        self.SYMB_entry = self.longframe('Nuclear Symbols: ','H O H',['Example', 'Tips: \n1. Separate with spaces.\n2. Order of symbols has to be consistent with your potential.\nFor example, water could be: \nO H H'])
+        self.NMASS_entry = self.longframe('Nuclear Mass (in a.u.): ',self.NMASS)
 
 
         Label(root, text='Equilibrium Cartesian Coordinates (in Bohr): ').pack()
@@ -147,23 +167,13 @@ class MMHelper():
 
         Label(root, text="2. VSCF/VCI configurations", bg="red", fg="white",font=("Helvetica", 16)).pack()
 
-        self.ICOUPL_entry = longframe('Number of modes coupled\n in potential integration (ICOUPL): ', 4, ['Manual: ICOUPL', 'The number of modes truncated in VSCF calculation. The higher ICOUPL the more computationally expensive. The typical convergence value is ICOUPL = 4'])
+        self.ICOUPL_entry = self.longframe('Number of modes coupled\n in potential integration (ICOUPL): ', 4, ['Manual: ICOUPL', 'The number of modes truncated in VSCF calculation. The higher ICOUPL the more computationally expensive. The typical convergence value is ICOUPL = 4'])
 
-        self.NMAX_entry = longframe('Number of mode coupling\n for VCI basis(NMAX): ',4)
-        self.MAXSUM_entry = longframe('MAXSUM',12)
-        self.MAXBAS_entry = longframe('MAXBAS for each mode',12)
-        self.NBF_entry = longframe('NBF',12)
-        self.NROTTR_entry = longframe('NROTTR', 0,['Quick Info',"Number of rotational and translational degrees of freedom to beincluded in 'vibrational' modes \nnumber of modes = NMODE=3*NATOM-6+NROTTR"])
-
-
-
-
-        def prt(even):
-            import tkinter
-            from tkinter import messagebox
-            tkinter.messagebox.showinfo('Executable Missing','Did not find executable, please load `mm.x` executable file.')
-
-
+        self.NMAX_entry = self.longframe('Number of mode coupling\n for VCI basis(NMAX): ',4)
+        self.MAXSUM_entry = self.longframe('MAXSUM',12)
+        self.MAXBAS_entry = self.longframe('MAXBAS for each mode',12)
+        self.NBF_entry = self.longframe('NBF',12)
+        self.NROTTR_entry = self.longframe('NROTTR', 0,['Quick Info',"Number of rotational and translational degrees of freedom to beincluded in 'vibrational' modes \nnumber of modes = NMODE=3*NATOM-6+NROTTR"])
 
 
         Label(root, text="3. Utilities", bg="red", fg="white",font=("Helvetica", 16)).pack()
@@ -182,27 +192,16 @@ class MMHelper():
         Button(root,text='Get VCI Matrix Size only').pack()
         b = Button(bottomFrame,text='run `./mm.x fort.1`')
         b.pack(side = LEFT)
-        b.bind('<Button-1>', lambda event: prt(event))
+        b.bind('<Button-1>', lambda event: self.prt(event))
         Button(bottomFrame,text='Load `mm.x` executable file').pack(side = LEFT)
 
-    def update(self, even):
 
-        import tkinter
-        from tkinter import messagebox
-        #[NATOM, NSYMB, NMASS, COORD, LINEAR, ICOUPL, NMAX, MAXSUM, MAXBAS, NBF, NROTTR] = param
-        # for p in param:
-        #     try:
-        #         if len(str(p.get())) is 0: #For Entry element, use str to bypass int
-        #             tkinter.messagebox.showinfo('Warning', 'Detected empty entry, operation aborted.')
-        #             return
-        #         else:
-        #             continue
-        #     except:
-        #         if  p.get("1.0", "end-1c") is 0: #For Text element
-        #             tkinter.messagebox.showinfo('Warning','Detected empty entry, operation aborted.')
-        #             return
-        #         else:
-        #             continue
+    def prt(self, even):
+        #import tkinter
+        #from tkinter import messagebox
+        tkinter.messagebox.showinfo('Executable Missing', 'Did not find executable, please load `mm.x` executable file.')
+
+    def update(self, even):
 
         self.TITLE = self.TITLE_entry.get()
         self.NATOM = int(self.NATOM_entry.get())
@@ -218,7 +217,7 @@ class MMHelper():
         self.LINEAR = int(self.LINEAR_check_button.get())
 
         #self.NBF_temp = int(self.NBF_entry.get())
-        Nnode = 3 * self.NATOM - 6 + self.LINEAR + self.NROTTR_entry.get()
+        Nnode = 3 * int(self.NATOM) - 6 + int(self.LINEAR) + int(self.NROTTR_entry.get())
         print('button',self.LINEAR_check_button.get())
         NBF = list()
         MBF = list()
@@ -248,14 +247,10 @@ class MMHelper():
 
         self.MAXSUM = MAXSUM
         self.MAXBAS = MAXBAS
-        #print(self.MAXSUM, self.MAXBAS)
-        self.NMAX = -4
 
+        self.NMAX = -int(self.NMAX_entry.get())
 
-
-        #print('No. Nnode =',Nnode)
-
-
+        self.SYMB = self.SYMB_entry.get().split()
 
         self.NROTTR = int(self.NROTTR_entry.get())
 
@@ -294,9 +289,9 @@ class MMHelper():
 
 
         self.generate_fort1(inputs)
-        tkinter.messagebox.showinfo('Info','Congratulations, `fort.1` is generated successfully.')
-
-
+        info = ['Info','Congratulations, `fort.1` is generated successfully. \nNumber of modes: {:d}'.format(Nnode)]
+        self.infobox( event=None, info=info)
+        #tkinter.messagebox.showinfo()
 
     def generate_fort1(self,p):
         """
@@ -336,7 +331,6 @@ class MMHelper():
         f.write('C**TITLE \n')
         f.write('{:s}\n'.format(p[0]))
         f.write('C**NATOM,NSTAT,CONV,ICOUPL,ICOUPC,ISCFCI,IWHICH,IDISC,NROTTR,JMAX,MCHECK,INORM \n')
-        print(p[1])
         f.write('   {:^6d}{:^5d}{:^5s}{:^7d}{:^7d}{:^7d}{:^7d}{:^6d}{:^8d}{:^5d}{:^7d}{:^5d}\n'.format(*p[1]))
         f.write('C**ICI NMAX  CUT     EVLJ0   NVALR KSTEP IPRINT MATSIZ IREACT MOLPRO MOLINC \n')
         f.write('  {:^5d}{:<6d}{:<8s}{:^5.2f}{:^8d}{:^7d}{:^7d}{:^7d}{:^7d}{:^8d}{:^6d}\n'.format(*p[2]))
@@ -392,7 +386,7 @@ class MMHelper():
         for i in range(len(NBF)):
             f.write(('{:5d}' * 4 + '\n').format(NBF[i], MBF[i], NVF[i], MVF[i]))
         f.write('C**NUCLEAR SYMBOLS\n')
-        f.write((' ' * 4 + '{:4s}' * 3 + '\n').format(*p[21]))
+        f.write((' ' * 4 + '{:4s}' * NATOM + '\n').format(*p[21]))
         f.write('C**SCF STATE DEFINITIONS (SEE ORIGINAL DEFINITION BY JELSKI) \n')
         f.write('C**NPOT (ONLY IF IWHICH=0) \n')
         if IWHICH is 0:
@@ -419,77 +413,7 @@ class MMHelper():
         f.close
         return
 
-
-
 if __name__ == '__main__':
     root = Tk()
-
     app = MMHelper(root)
-
     root.mainloop()
-
-
-
-
-    #
-    # def get(event):
-    #     return entry_natom.get()
-    #
-    # var_NATOM = StringVar(root)
-    #
-    # label_info = Label(fm, text='Molecule System Information').pack(side=LEFT)
-    #
-    # label_natom = Label(fm, text='Number of atoms: ').pack(side=LEFT)
-    # entry_natom = Entry(fm, textvariable=var_NATOM)
-    # entry_natom.pack(side=LEFT)
-    # entry_natom.bind('<Return>', get)
-    # NATOM = get
-    # print(NATOM,'tesss')
-    #
-    # line2=Frame(root)
-    # line2.pack()
-
-
-    # natom_entry = Entry(line2,textvariable=sv)
-    # natom_entry.pack(side=LEFT)
-    # natom_entry.delete(0, END)
-    # natom_entry.insert(0, "Enter value here")
-    # NATOM = natom_entry.get()
-    # bottomFrame = Frame(root)
-    # bottomFrame.pack(side=BOTTOM)
-    # def printName(event, NATOM):
-    #     import tkinter
-    #     from tkinter import messagebox
-    #     print('test')
-    #     tkinter.messagebox.showinfo('Window Title', NATOM)
-    # button1 = Button(bottomFrame, text = 'Get VCI Matrix Size')
-    # button2 = Button(bottomFrame, text = 'Print NATOM')
-    # button2.bind('<Button-1>',lambda event:printName(event, var_NATOM.get()))
-    # button2.pack()
-    # button1.pack()
-
-
-
-
-
-
-
-    #topFrame = Frame(root) #
-    #topFrame.pack() #If you want to show this frame, you have to pack it in the window. Default is top.
-    #label_1 = Label(root,text='Name')
-    #theLabel = Label(root,text="MULTIMODE's Little Helper").pack(side=TOP)
-    #Entry(text="Entry").pack(side=TOP)
-
-
-    #bottomFrame = Frame(root)
-    #bottomFrame.pack(side=BOTTOM) # Pack this frame on the bottom.
-    #button1 = Button(bottomFrame,text='Get VCI Matrix Size')
-    #button1.pack(side=BOTTOM)
-    #theLabel.pack() #label pops out really fast and close really fast.
-
-
-
-
-
-
-     #This means have window continuous on the screen until
