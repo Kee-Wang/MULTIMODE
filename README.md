@@ -8,7 +8,7 @@ MULTIMODE is a general code that obtains the ro-vibrational eigenvalues and eige
 * Our MM was tested with `gfotran` or `ifort` compilor in Linux system. 
 * There is known compatibility problem compling using MacOS with `GNU Fortran (GCC) 6.1.0`, and we don't have a soluiton for that yet.
 
-## A Quick Usage Guide
+## A Quick Usage Guide -- Command Line version
 Details of usage is elaborated in `/mm/src`, and here we only provide a glance of general procedure.
 
 * Go to `/mm/src` to link user's potential in `user.XXX.f`
@@ -19,6 +19,14 @@ Details of usage is elaborated in `/mm/src`, and here we only provide a glance o
 
 **Common problems are discusseed in [`QnA.md`](https://github.com/Kee-Wang/MULTIMODE/blob/master/QnA.md) file.**
 
+## A Quick Usage Guide -- try MM's Little Helper GUI!
+Not all parameters in `fort.1` are essential. Some of the parameters can be hidden and some parameters has annoying correlations relationship with other parameters, which is hard to keep track for beginners. The difficulty has been noticed for a long time, which finally urges us to develp a user-frendly GUI version to help generate `fort.1`.
+
+Meet `MM's little helper!` This is a GUI version of MM input file that hide non-essential parameters and have nicer user-interface to generate a comelete version of `fort.1` can be readily executed by `mm.x`.
+
+Current'y only `generate fort.1` button is working. Other new features will be coming! Here is the screen shot:
+
+![Image of MM's little helper](https://github.com/Kee-Wang/MULTIMODE/blob/master/mmhelper/mm_helper_screen_shot.png)
 
 
 
