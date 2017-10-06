@@ -56,7 +56,7 @@ The first publicly-avaible version. The package was uploaded to Github with a my
 ## Important pre-public versions [Histroy]
 
 ### ver. 5.1.4
-The package is available to deal with linear molecules such as CO2.
+The package is updated with new features.
 
 ### ver. 4.9.0
 One of most extensively used stable versions for years in the group. Lots of new features added.
